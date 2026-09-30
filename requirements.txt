@@ -1,0 +1,17 @@
+numpy
+pandas
+openpyxl
+scipy
+scikit-learn
+joblib
+matplotlib
+
+mlflow
+
+rank-bm25
+sentence-transformers
+faiss-cpu
+
+streamlit
+
+pytest
