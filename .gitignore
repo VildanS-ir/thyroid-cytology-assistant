@@ -29,6 +29,15 @@ data/*
 !data/synthetic/
 !data/synthetic/.gitkeep
 
+# Keep local dataset directory structure
+!data/raw/
+data/raw/*
+!data/raw/.gitkeep
+
+!data/processed/
+data/processed/*
+!data/processed/.gitkeep
+
 # Raw tabular files
 *.xlsx
 *.xls
