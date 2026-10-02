@@ -285,7 +285,7 @@ def extract_bethesda_categories(text):
     # [aа] учитывает как латинскую "a", так и кириллическую "а"
     # в слове Bethesda, потому что в исходных текстах такое может встречаться.
     bethesda_pattern = (
-        rf"\bbethesd[aа]\b"
+        r"\b[bв][eе]th[eе]sd[aа]\b"
         rf"[\s\S]{{0,250}}?"
         rf"\b{roman_pattern}\b"
     )

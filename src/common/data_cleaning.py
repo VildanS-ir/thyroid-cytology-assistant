@@ -115,9 +115,9 @@ def extract_bethesda_categories(text):
     # Bethesda II
     # Bethesda-II
     # Bethesda: диагностическая категория VI
-    # Bethesdа с кириллической буквой "а".
+    # Bethesdа с кириллической буквой.
     bethesda_pattern = (
-        rf"\bbethesd[aа]\b"
+        r"\b[bв][eе]th[eе]sd[aа]\b"
         rf"[\s\S]{{0,250}}?"
         rf"\b{roman_pattern}\b"
     )
