@@ -3,7 +3,6 @@
 import csv
 import random
 import re
-from itertools import chain
 from pathlib import Path
 
 
@@ -31,20 +30,10 @@ def main() -> None:
     with DATA_PATH.open(encoding="utf-8-sig", newline="") as source:
         reader = csv.reader(source)
         columns = next(reader, [])
-        if (
-            len(columns) == 1
-            and columns[0].strip().replace("\\", "/")
-            == "data/processed/cleaned_dataset.csv"
-        ):
-            columns = next(reader, [])
 
         required_columns = {"needs_review", "description", "conclusion"}
         if required_columns.issubset(columns):
             records = reader
-        elif len(columns) == 5:
-            # В файле без заголовка первая прочитанная строка — запись с данными.
-            records = chain((columns,), reader)
-            columns = ("case_id", "description", "conclusion", "bethesda", "needs_review")
         else:
             missing_columns = required_columns - set(columns)
             raise ValueError(f"Отсутствуют столбцы: {', '.join(sorted(missing_columns))}")

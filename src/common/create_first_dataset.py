@@ -2,7 +2,6 @@
 
 import csv
 import math
-from itertools import chain
 from pathlib import Path
 
 from data_cleaning import CLEAN_DATA_PATH, main as clean_data, save_dataset
@@ -41,21 +40,12 @@ def read_cleaned_rows() -> list[list[str]]:
         reader = csv.reader(source, delimiter=",")
         columns = next(reader, [])
 
-        # Support files that contain a path line before the CSV header.
-        if len(columns) == 1 and columns[0].strip().replace("\\", "/") == (
-            "data/processed/cleaned_dataset.csv"
-        ):
-            columns = next(reader, [])
-
         normalized_columns = [column.strip() for column in columns]
         if set(INPUT_COLUMNS).issubset(normalized_columns):
             indexes = {
                 name: normalized_columns.index(name) for name in INPUT_COLUMNS
             }
             records = reader
-        elif len(columns) == len(INPUT_COLUMNS):
-            indexes = {name: index for index, name in enumerate(INPUT_COLUMNS)}
-            records = chain((columns,), reader)
         else:
             raise ValueError(
                 "cleaned_dataset.csv должен содержать столбцы: "

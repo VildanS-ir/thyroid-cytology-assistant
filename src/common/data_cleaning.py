@@ -244,7 +244,7 @@ def main():
     dataset = mark_needs_review(dataset)
 
     # Сохраняем в data/processed/cleaned_dataset.csv
-#    save_dataset(dataset)
+    save_dataset(dataset)
 
     return dataset
 
