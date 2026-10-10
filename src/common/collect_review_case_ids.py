@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-INPUT_PATH = PROJECT_ROOT / "data" / "processed" / "cleaned_dataset.csv"
+INPUT_PATH = PROJECT_ROOT / "data" / "processed" / "annotated_dataset.csv"
 OUTPUT_PATH = (
     PROJECT_ROOT
     / "data"
@@ -22,12 +22,12 @@ def main() -> None:
     with INPUT_PATH.open(encoding="utf-8-sig", newline="") as source:
         reader = csv.DictReader(source, delimiter=",")
         if reader.fieldnames is None:
-            raise ValueError("cleaned_dataset.csv должен содержать заголовок.")
+            raise ValueError("annotated_dataset.csv должен содержать заголовок.")
 
         reader.fieldnames = [name.strip() for name in reader.fieldnames]
         if not set(INPUT_COLUMNS).issubset(reader.fieldnames):
             raise ValueError(
-                "cleaned_dataset.csv должен содержать столбцы: "
+                "annotated_dataset.csv должен содержать столбцы: "
                 + ", ".join(INPUT_COLUMNS)
             )
 
@@ -52,7 +52,9 @@ def main() -> None:
             else:
                 unflagged_rows.append((case_id, description))
 
-    # create_first_dataset.py calculates P5 after selecting needs_review=false.
+    # P5 здесь рассчитывается отдельно для всех needs_review=False.
+    # В prepare_dataset.py P5 рассчитывается после отбора дубликатов,
+    # поэтому наборы коротких описаний могут различаться.
     if unflagged_rows:
         sorted_lengths = sorted(len(description) for _, description in unflagged_rows)
         p5_index = math.ceil(0.05 * len(sorted_lengths)) - 1
