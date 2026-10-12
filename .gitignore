@@ -77,3 +77,8 @@ tempCodeRunnerFile.py
 build/
 dist/
 *.egg-info/
+
+# MLflow local files
+mlflow.db
+mlruns/
+mlartifacts/
