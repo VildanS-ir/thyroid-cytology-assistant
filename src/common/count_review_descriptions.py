@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 
 
-DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "processed" / "cleaned_dataset.csv"
+DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "processed" / "annotated_dataset.csv"
 WITH_PHRASE_PATH = DATA_PATH.with_name("to_check_with_phrase.csv")
 NO_PHRASE_PATH = DATA_PATH.with_name("to_check_no_phrase.csv")
 SAMPLE_SIZE = 50
